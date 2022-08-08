@@ -1,4 +1,4 @@
-// Import Section
+// Imports
 let {envelopes} = require('../database/data');
 
 
@@ -14,10 +14,16 @@ const getAllEnvelopes = () => {
  * Adding a new envelope to the database
  * @param {string} category The envelope's category
  * @param {number} amount The envelope's budget
- * @returns the newly created envelope
+ * @returns the newly created envelope or false if the category already exists
  */
 const addNewEnvelope = (category,amount) => {
-    const id = envelopes[envelopes.length - 1].id + 1;
+
+    // Checking if the category already exists
+    const isExistingCategory = envelopes.filter(env => env.category === category);
+    if (isExistingCategory.length) return false;
+
+    // Adding a new category
+    const id = envelopes.length ? envelopes[envelopes.length - 1].id + 1 : 1;
     const newEnvelope = {
         id,
         category,
@@ -95,7 +101,7 @@ const transferBudget = (from,to,amount) => {
 
 
 
-
+// Exports
 module.exports = {
     getAllEnvelopes,
     addNewEnvelope,

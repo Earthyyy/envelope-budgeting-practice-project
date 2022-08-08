@@ -1,6 +1,6 @@
+// Imports
 const router = require('express').Router();
 const {transferBudget} = require('../utils/utils')
-
 
 
 // the transfer logic
@@ -16,14 +16,5 @@ router.post('/',(req,res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
+// Exports
 module.exports.transferRouter = router;

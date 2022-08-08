@@ -1,13 +1,13 @@
-// Import Section
+// Imports + Variables
 const express = require('express');
 const {envelopeRouter} = require('./src/routes/envelopes');
 const {transferRouter} = require('./src/routes/transfer');
 const {data} = require('./src/database/data');
-
-
-// Initializations
-const app = express();
 const PORT = process.env.PORT || 3000;
+
+
+// Creating the express app
+const app = express();
 
 // Middleware to parse request bodies
 app.use(express.json());

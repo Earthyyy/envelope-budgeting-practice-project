@@ -1,3 +1,4 @@
+// Imports
 const router = require('express').Router();
 const validator = require('validator');
 const {
@@ -25,7 +26,7 @@ router.get('/:Id',(req,res) => {
         res.status(200).json(filteredEnvelopes[0]);
     } else {
         res.status(404).json({
-            message: 'Page not found'
+            message: 'Envelope not found'
         })
     }
 })
@@ -34,10 +35,11 @@ router.get('/:Id',(req,res) => {
 router.post('/',(req,res) => {
     const {category,amount} = req.body;
 
-    if (!validator.isEmpty(category)) {
+    if (category) {
         const amountToFloat = amount ? amount : 0;
         const createdEnvelope = addNewEnvelope(category,amountToFloat);
-
+        if (!createdEnvelope) return res.status(400).json({message: 'Category already exists!'});
+        
         res.status(201).json({
             message: 'Envelope created successfully!',
             createdEnvelope
@@ -79,5 +81,5 @@ router.delete('/:Id',(req,res) => {
     }
 })
 
-
+// Exports
 module.exports.envelopeRouter = router;
