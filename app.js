@@ -2,7 +2,6 @@
 const express = require('express');
 const {envelopeRouter} = require('./src/routes/envelopes');
 const {transferRouter} = require('./src/routes/transfer');
-const {data} = require('./src/database/data');
 const PORT = process.env.PORT || 3000;
 
 
@@ -28,7 +27,7 @@ app.get('/',(req,res) => {
 
 // Server listening at PORT ...
 app.listen(PORT,() => {
-    console.log('Server listening on PORT : ' + PORT);
+    console.log('Server listening at PORT : ' + PORT);
 })
 
 
