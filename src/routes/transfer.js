@@ -1,12 +1,17 @@
 const router = require('express').Router();
+const {transferBudget} = require('../utils/utils')
 
 
 
-
-// TODO: Implement the transfer logic
+// the transfer logic
 router.post('/',(req,res) => {
     const {from,to,amount} = req.body;
-    res.send(`<h2>Transfering ${amount} from ${from} to ${to}</h2>`);
+    if (from && to && amount) {
+        if (transferBudget(from,to,amount)) res.status(200).json({message: 'Transaction completed successfully!'});
+        else res.status(400).json({message: "Can't complete transaction! please check your informations"});
+    } else {
+        res.status(400).json({message: 'Invalid Request! Please check your inputs'});
+    }
 })
 
 

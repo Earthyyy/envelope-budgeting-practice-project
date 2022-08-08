@@ -50,6 +50,9 @@ const updateEnvelopeById = (id,category,amount) => {
     const envIndex = envelopes.findIndex(env => env.id === id);
     if (envIndex === -1) return false;
     else {
+
+        if (amount > envelopes[envIndex].amount) return false;
+
         if (category) envelopes[envIndex].category = category;
         if (amount) envelopes[envIndex].amount -= amount;
         return envelopes[envIndex];
@@ -72,6 +75,25 @@ const deleteEnvelopeById = (id) => {
 }
 
 
+/**
+ * Transfers an amount of budget from
+ * @param {number} from The sender envelope's id
+ * @param {number} to The receiver envelope's id
+ * @param {number} amount The amount to be transfered
+ * @returns true if transaction succeeds else false
+ */
+const transferBudget = (from,to,amount) => {
+    if (getEnvelopeById(from).length && getAllEnvelopes(to).length) {
+        if (updateEnvelopeById(from,"",amount)) {
+            updateEnvelopeById(to,"",-amount);
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+
 
 
 module.exports = {
@@ -79,5 +101,6 @@ module.exports = {
     addNewEnvelope,
     getEnvelopeById,
     updateEnvelopeById,
-    deleteEnvelopeById
+    deleteEnvelopeById,
+    transferBudget
 }
