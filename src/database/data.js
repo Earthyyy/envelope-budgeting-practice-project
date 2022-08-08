@@ -1,5 +1,11 @@
 // envelopes is a list of envolope objects
-envelopes = [];
+let envelopes = [
+    {
+        id: 1,
+        category: "grocery",
+        amount: 175
+    }
+];
 
 
 
