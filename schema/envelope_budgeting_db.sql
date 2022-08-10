@@ -17,6 +17,5 @@ CREATE TABLE "transactions" (
   "payment_receipient" varchar
 );
 
-ALTER TABLE "envelopes" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
-
+ALTER TABLE "envelopes" ADD CONSTRAINT "envelopes_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories" ("id") ON DELETE CASCADE;
 ALTER TABLE "transactions" ADD FOREIGN KEY ("envelope_id") REFERENCES "envelopes" ("id");
