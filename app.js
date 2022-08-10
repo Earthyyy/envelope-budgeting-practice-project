@@ -13,9 +13,9 @@ app.use(express.json());
 
 
 // Using the envelopeRouter for /envelopes PATH
-app.use('/envelopes',envelopeRouter);
+app.use('/api/v1/envelopes',envelopeRouter);
 // Using the transferRouter for /transfer PATH
-app.use('/transfer',transferRouter);
+app.use('/api/v1/transfer',transferRouter);
 
 // Setting up the default page
 app.get('/',(req,res) => {
