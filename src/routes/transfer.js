@@ -28,6 +28,11 @@ const {transferBalance} = require('../controllers/TransferController')
  *                                  type: integer
  *                              amount:
  *                                  type: integer
+ *                          example:
+ *                              from: 1
+ *                              to: 2
+ *                              amount: 35
+ * 
  *          responses:
  *              "200":
  *                  description: Amount transfered

@@ -25,6 +25,7 @@ const {
  *                description: envelope's id
  *                type: integer
  *                required: true
+ *                example: 1
  *          responses:
  *              "200":
  *                  description: Returns a list of an envelope's transactions
@@ -50,6 +51,7 @@ router.get('/',getTransactionByEnvelope);
  *                description: envelope's id
  *                type: integer
  *                required: true
+ *                example: 1
  *          requestBody:
  *              description: Transaction details
  *              required: true
@@ -62,6 +64,9 @@ router.get('/',getTransactionByEnvelope);
  *                                  type: number
  *                              receipient:
  *                                  type: string
+ *                          example:
+ *                              amount: 10
+ *                              receipient: Homeless
  *          responses:
  *              "201":
  *                  description: Transaction complete

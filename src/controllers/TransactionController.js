@@ -34,7 +34,7 @@ async function addTransaction(req,res) {
         ]);
 
         await client.query('COMMIT');
-        return res.status(201).json({message: 'Transaction added successfully'})
+        return res.status(201).json({message: 'Transaction complete'})
     } catch (error) {
         await client.query('ROLLBACK');
         return res.status(500).json({message: 'Internal Server Error'});

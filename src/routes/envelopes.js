@@ -58,6 +58,7 @@ router.get('/',getAllEnvelopes);
  *                description: envelope's id
  *                type: integer
  *                required: true
+ *                example: 1
  *          responses:
  *              "200": 
  *                  description: Returns a single envelope with its data
@@ -94,6 +95,9 @@ router.get('/:Id',getEnvelopeById);
  *                                  type: string
  *                              amount:
  *                                  type: number
+ *                          example:
+ *                              category: gaming
+ *                              amount: 20
  *          responses:
  *              "201":
  *                  description: Returns a success message
@@ -119,6 +123,7 @@ router.post('/',validateUserInput,checkEnvelopeIfAlreadyExists,addNewEnvelope)
  *                description: envelope's id
  *                type: integer
  *                required: true
+ *                example: 3
  *          requestBody:
  *              description: new envelope's data
  *              required: true
@@ -131,6 +136,10 @@ router.post('/',validateUserInput,checkEnvelopeIfAlreadyExists,addNewEnvelope)
  *                                  type: string
  *                              amount:
  *                                  type: number
+ *                          example:
+ *                              category: household
+ *                              amount: 48
+ *                                  
  *          responses:
  *              "201":
  *                  description: Envelope updated
@@ -159,6 +168,7 @@ router.put('/:Id',validateUpdateEnvelopeInput,checkEnvelopeIfAlreadyExistsUpdate
  *                description: envelope's id
  *                type: integer
  *                required: true
+ *                example: 3
  *         responses:
  *              "204":
  *                  description: Envelope deleted
