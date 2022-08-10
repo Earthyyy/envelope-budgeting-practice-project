@@ -57,7 +57,6 @@ async function checkEnvelopeIfAlreadyExists(req,res,next) {
         
         return next();
     } catch (error) {
-        console.log('[checkEnvelopeIfAlreadyExists] Query Error!')
         res.status(500).json({
             message: 'Server internal Error!'
         })

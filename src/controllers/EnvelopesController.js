@@ -35,7 +35,6 @@ const addNewEnvelope = async (req,res) => {
         
         res.status(201).send({message: 'Envelope created successfully'});
     } catch (error) {
-        // console.log('[addNewEnvelope] ' + error)
         res.status(500).json({message: 'Server internal Error!'});
     }
 }
@@ -63,7 +62,7 @@ const updateEnvelopeById = async (req,res) => {
 
         return res.status(201).json({message: 'Envelope updated successfully'});
     } catch (error) {
-        console.log('[updateEnvelopeById] ' + error);
+        
         return res.status(500).json({message: 'Internal Server Error!'});
     }
 
