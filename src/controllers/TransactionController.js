@@ -4,12 +4,16 @@ let db = require('../database/index');
 
 
 async function getTransactionByEnvelope(req,res)  {
-    const transactions = await db.query(`SELECT categories.name as category, transactions.date, transactions.payment_amount, transactions.payment_receipient
-    FROM categories, transactions, envelopes
-    WHERE transactions.envelope_id = envelopes.id AND envelopes.category_id = categories.id AND transactions.envelope_id = $1;`,[
-        req.id
-    ]);
-    return res.status(200).json(transactions.rows);
+    try {
+        const transactions = await db.query(`SELECT categories.name as category, transactions.date, transactions.payment_amount, transactions.payment_receipient
+        FROM categories, transactions, envelopes
+        WHERE transactions.envelope_id = envelopes.id AND envelopes.category_id = categories.id AND transactions.envelope_id = $1;`,[
+            req.id
+        ]);
+        return res.status(200).json(transactions.rows);  
+    } catch (error) {
+        return res.status(500).json({message: "Server internal error"});
+    }
 }
 
 

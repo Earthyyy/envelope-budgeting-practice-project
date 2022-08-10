@@ -23,19 +23,153 @@ const {transactionRouter} = require('./transaction');
 router.param('Id',checkEnvelopeAvailabilityById)
 
 
-// GET all envelopes route
+
+/**
+ * @swagger
+ * /api/v1/envelopes:
+ *    get:
+ *      summary: Get all envelopes
+ *      produces:
+ *          - application/json
+ *      tags:
+ *          - Envelopes
+ *      responses:
+ *          "200":
+ *              description: Returns a list of all envelopes
+ *          "500":
+ *              description: Internal server error
+ */
 router.get('/',getAllEnvelopes);
 
-// GET envelopes by ID route
+
+
+/**
+ * @swagger
+ * /api/v1/envelopes/{Id}:
+ *    get:
+ *          summary: Get an envelope by Id
+ *          produces:
+ *              - application/json
+ *          tags:
+ *              - Envelopes
+ *          parameters:
+ *              - in: path
+ *                name: Id
+ *                description: envelope's id
+ *                type: integer
+ *                required: true
+ *          responses:
+ *              "200": 
+ *                  description: Returns a single envelope with its data
+ *              "400":
+ *                  description: Id must be an integer
+ *              "404":
+ *                  description: Envelope not found
+ *              "500":
+ *                  description: Internal server error
+ */
 router.get('/:Id',getEnvelopeById);
 
-// POST an envelope ROUTE
+
+
+
+/**
+ * @swagger
+ * /api/v1/envelopes:
+ *    post:
+ *          summary: Creates a new envelope
+ *          produces: 
+ *              - application/json
+ *          tags:
+ *              - Envelopes
+ *          requestBody:
+ *              description: new envelope's data
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              category:
+ *                                  type: string
+ *                              amount:
+ *                                  type: number
+ *          responses:
+ *              "201":
+ *                  description: Returns a success message
+ *              "500":
+ *                  description: Internal server error
+ */
 router.post('/',validateUserInput,checkEnvelopeIfAlreadyExists,addNewEnvelope)
 
-// UPDATE an envelope ROUTE
+
+
+/**
+ * @swagger
+ * /api/v1/envelopes/{Id}:
+ *     put:
+ *          summary: Updates an existing envelope
+ *          produces:
+ *              - application/json
+ *          tags:
+ *              - Envelopes
+ *          parameters:
+ *              - in: path
+ *                name: Id
+ *                description: envelope's id
+ *                type: integer
+ *                required: true
+ *          requestBody:
+ *              description: new envelope's data
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              category:
+ *                                  type: string
+ *                              amount:
+ *                                  type: number
+ *          responses:
+ *              "201":
+ *                  description: Envelope updated
+ *              "400":
+ *                  description: Id must be an integer
+ *              "404":
+ *                  description: Envelope not found
+ *              "500":
+ *                  description: Internal server error
+ */
 router.put('/:Id',validateUpdateEnvelopeInput,checkEnvelopeIfAlreadyExistsUpdate,updateEnvelopeById);
 
-// DELETE an envelope ROUTE
+
+/**
+ * @swagger
+ * /api/v1/envelopes/{Id}:
+ *    delete:
+ *         summary: delete an existing envelope
+ *         produces:
+ *              - application/json
+ *         tags:
+ *              - Envelopes
+ *         parameters:
+ *              - in: path
+ *                name: Id
+ *                description: envelope's id
+ *                type: integer
+ *                required: true
+ *         responses:
+ *              "204":
+ *                  description: Envelope deleted
+ *              "400":
+ *                  description: Id must be an integer
+ *              "404":
+ *                  description: Envelope not found
+ *              "500":
+ *                  description: Internal server error
+ *        
+ */
 router.delete('/:Id',deleteEnvelopeById);
 
 router.use('/:Id/transaction',transactionRouter);

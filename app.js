@@ -2,7 +2,28 @@
 const express = require('express');
 const {envelopeRouter} = require('./src/routes/envelopes');
 const {transferRouter} = require('./src/routes/transfer');
+// const {swaggerRouter} = require('./src/routes/docs')
+const swagger = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 const PORT = process.env.PORT || 3000;
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Envelope Budgeting API",
+            version: "1.0.0",
+            descrription: "A basic API that allows clients to manage their personal budget.",
+            license: {
+                name: "MIT",
+                url: "https://choosealicense.com/licenses/mit/"
+            },
+        },
+    },
+    apis: ["./src/routes/envelopes.js","./src/routes/transaction.js","./src/routes/transfer.js"]
+};
+
+const specs = swagger(swaggerOptions);
 
 
 // Creating the express app
@@ -16,11 +37,12 @@ app.use(express.json());
 app.use('/api/v1/envelopes',envelopeRouter);
 // Using the transferRouter for /transfer PATH
 app.use('/api/v1/transfer',transferRouter);
+// Setting up the documentation page
+app.use('/',swaggerUI.serve);
+app.get("/",swaggerUI.setup(specs, {
+    explorer: true
+}))
 
-// Setting up the default page
-app.get('/',(req,res) => {
-    res.send('<h1>Envelope Budgeting API<h1>');
-})
 
 
 
