@@ -16,6 +16,8 @@ checkEnvelopeIfAlreadyExistsUpdate,
 validateUpdateEnvelopeInput
 } = require('../middlewares/EnvelopeMiddleware');
 
+const {transactionRouter} = require('./transaction');
+
 
 
 router.param('Id',checkEnvelopeAvailabilityById)
@@ -35,6 +37,8 @@ router.put('/:Id',validateUpdateEnvelopeInput,checkEnvelopeIfAlreadyExistsUpdate
 
 // DELETE an envelope ROUTE
 router.delete('/:Id',deleteEnvelopeById);
+
+router.use('/:Id/transaction',transactionRouter);
 
 // Exports
 module.exports.envelopeRouter = router;

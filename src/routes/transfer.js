@@ -4,7 +4,7 @@ const {validateTransferInput} = require('../middlewares/TransferMiddleware');
 const {transferBalance} = require('../controllers/TransferController')
 
 
-// the transfer logic
+// POST /transfer ROUTE
 router.post('/',validateTransferInput,transferBalance)
 
 
